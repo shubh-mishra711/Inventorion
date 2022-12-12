@@ -1,0 +1,232 @@
+<!doctype html>
+
+<html lang="en">
+	
+<head>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Stephanie Cervi Design">
+	<meta name="theme-color" content="#712cf9">
+	
+	<title>Dashboard || Inventorion</title>
+	
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/dashboard.css" rel="stylesheet">
+
+	<!-- Favicons -->
+	<link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+	<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+	<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+	<link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
+	<link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+	<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+
+	<!-- update the version number as needed --> 
+	<script defer src="/__/firebase/9.14.0/firebase-app-compat.js"></script> 
+	<!-- include only the Firebase features as you need --> 
+	<script defer src="/__/firebase/9.14.0/firebase-auth-compat.js"></script> 
+	<script defer src="/__/firebase/9.14.0/firebase-database-compat.js"></script> 
+	<script defer src="/__/firebase/9.14.0/firebase-firestore-compat.js"></script> 
+	<script defer src="/__/firebase/9.14.0/firebase-functions-compat.js"></script> 
+	<script defer src="/__/firebase/9.14.0/firebase-messaging-compat.js"></script> 
+	<script defer src="/__/firebase/9.14.0/firebase-storage-compat.js"></script> 
+	<script defer src="/__/firebase/9.14.0/firebase-analytics-compat.js"></script> 
+	<script defer src="/__/firebase/9.14.0/firebase-remote-config-compat.js"></script> 
+	<script defer src="/__/firebase/9.14.0/firebase-performance-compat.js"></script> 
+	<!-- initialize the SDK after all desired features are loaded, set useEmulator to false to avoid connecting the SDK to running emulators. --> 
+	<script defer src="/__/firebase/init.js?useEmulator=true"></script>
+	
+</head>
+	
+<body>
+	
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+	
+	<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="/">Inventorion</a>
+	<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+	<h1 class="w-100 rounded-0 border-0" id="storeName"></h1>
+	<div class="navbar-nav">
+		<div class="nav-item text-nowrap">
+			<a class="nav-link px-3" href="#" id="signOutButton">Sign out</a>
+		</div>
+	</div>
+	
+</header>
+	
+<div class="container-fluid">
+	
+	<div class="row">
+		
+		<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+			<div class="position-sticky pt-3 sidebar-sticky">
+				<ul class="nav flex-column">
+					<!-- Add Bootstrap icons before the text -->
+					<li class="nav-item"><a class="nav-link active" aria-current="page" href="#">Dashboard</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Orders</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Products</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Inventory</a></li>
+				</ul>
+				<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
+					<span>Reports</span>
+					<!-- Add plus icon here -->
+				</h6>
+				<ul class="nav flex-column mb-2">
+					<li class="nav-item"><a class="nav-link" href="#">Current month</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Last quarter</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Social engagement</a></li>
+					<li class="nav-item"><a class="nav-link" href="#">Year-end sale</a></li>
+				</ul>
+			</div>
+		</nav>
+		
+		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+				<h1 class="h2">Dashboard</h1>
+				<div class="btn-toolbar mb-2 mb-md-0">
+					<div class="btn-group me-2">
+						<button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+						<button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+					</div>
+					<button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle"> <span data-feather="calendar" class="align-text-bottom"></span> This week </button>
+				</div>
+			</div>
+			<canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+			<h2>Section title</h2>
+			<div class="table-responsive">
+				<table class="table table-striped table-sm">
+					<thead>
+						<tr>
+							<th scope="col">#</th>
+							<th scope="col">Header</th>
+							<th scope="col">Header</th>
+							<th scope="col">Header</th>
+							<th scope="col">Header</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1,001</td>
+							<td>random</td>
+							<td>data</td>
+							<td>placeholder</td>
+							<td>text</td>
+						</tr>
+						<tr>
+							<td>1,002</td>
+							<td>placeholder</td>
+							<td>irrelevant</td>
+							<td>visual</td>
+							<td>layout</td>
+						</tr>
+						<tr>
+							<td>1,003</td>
+							<td>data</td>
+							<td>rich</td>
+							<td>dashboard</td>
+							<td>tabular</td>
+						</tr>
+						<tr>
+							<td>1,003</td>
+							<td>information</td>
+							<td>placeholder</td>
+							<td>illustrative</td>
+							<td>data</td>
+						</tr>
+						<tr>
+							<td>1,004</td>
+							<td>text</td>
+							<td>random</td>
+							<td>layout</td>
+							<td>dashboard</td>
+						</tr>
+						<tr>
+							<td>1,005</td>
+							<td>dashboard</td>
+							<td>irrelevant</td>
+							<td>text</td>
+							<td>placeholder</td>
+						</tr>
+						<tr>
+							<td>1,006</td>
+							<td>dashboard</td>
+							<td>illustrative</td>
+							<td>rich</td>
+							<td>data</td>
+						</tr>
+						<tr>
+							<td>1,007</td>
+							<td>placeholder</td>
+							<td>tabular</td>
+							<td>information</td>
+							<td>irrelevant</td>
+						</tr>
+						<tr>
+							<td>1,008</td>
+							<td>random</td>
+							<td>data</td>
+							<td>placeholder</td>
+							<td>text</td>
+						</tr>
+						<tr>
+							<td>1,009</td>
+							<td>placeholder</td>
+							<td>irrelevant</td>
+							<td>visual</td>
+							<td>layout</td>
+						</tr>
+						<tr>
+							<td>1,010</td>
+							<td>data</td>
+							<td>rich</td>
+							<td>dashboard</td>
+							<td>tabular</td>
+						</tr>
+						<tr>
+							<td>1,011</td>
+							<td>information</td>
+							<td>placeholder</td>
+							<td>illustrative</td>
+							<td>data</td>
+						</tr>
+						<tr>
+							<td>1,012</td>
+							<td>text</td>
+							<td>placeholder</td>
+							<td>layout</td>
+							<td>dashboard</td>
+						</tr>
+						<tr>
+							<td>1,013</td>
+							<td>dashboard</td>
+							<td>irrelevant</td>
+							<td>text</td>
+							<td>visual</td>
+						</tr>
+						<tr>
+							<td>1,014</td>
+							<td>dashboard</td>
+							<td>illustrative</td>
+							<td>rich</td>
+							<td>data</td>
+						</tr>
+						<tr>
+							<td>1,015</td>
+							<td>random</td>
+							<td>tabular</td>
+							<td>information</td>
+							<td>text</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</main>
+	</div>
+	
+</div>
+	
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script> 
+	
+</body>
+</html>
