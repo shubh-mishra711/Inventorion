@@ -1,0 +1,90 @@
+<!doctype html>
+
+<html lang="en">
+	
+<head>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Stephanie Cervi Design">
+	<meta name="theme-color" content="#712cf9">
+	
+	<title>Sign In || Inventorion</title>
+
+	<!-- CSS -->
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/dashboard.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+
+	<!-- Favicons -->
+	<!--link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+	<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
+	<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
+	<link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
+	<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico"-->
+	<!--link rel="manifest" href="/manifest.json"-->
+	
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-MTQ4LJKBZ9"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-MTQ4LJKBZ9');
+	</script>
+
+	
+	<!-- FIREBASE -->
+	<!-- update the version number as needed --> 
+	<script defer src="/__/firebase/9.6.8/firebase-app-compat.js"></script> 
+	<!-- include only the Firebase features as you need --> 
+	<script defer src="/__/firebase/9.6.8/firebase-auth-compat.js"></script> 
+	<!--script defer src="/__/firebase/9.6.8/firebase-database-compat.js"></script--> 
+	<script defer src="/__/firebase/9.6.8/firebase-firestore-compat.js"></script> 
+	<!--script defer src="/__/firebase/9.6.8/firebase-functions-compat.js"></script--> 
+	<!--script defer src="/__/firebase/9.6.8/firebase-messaging-compat.js"></script--> 
+	<!--script defer src="/__/firebase/9.6.8/firebase-storage-compat.js"></script--> 
+	<script defer src="/__/firebase/9.6.8/firebase-analytics-compat.js"></script> 
+	<script defer src="/__/firebase/9.6.8/firebase-remote-config-compat.js"></script> 
+	<script defer src="/__/firebase/9.6.8/firebase-performance-compat.js"></script> 
+	<!-- initialize the SDK after all desired features are loaded, set useEmulator to false to avoid connecting the SDK to running emulators. --> 
+	<script defer src="/__/firebase/init.js?useEmulator=true"></script>
+	
+	<!-- Login UI from Firebase -->
+	<script src="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.js"></script>
+	<link type="text/css" rel="stylesheet" href="https://www.gstatic.com/firebasejs/ui/6.0.1/firebase-ui-auth.css" />
+</head>
+	
+<body class="d-flex flex-column h-100 dark-mode">
+
+<header id="header"></header>
+
+<!-- Begin page content -->
+<main>
+	
+	<div class="container login-container">
+		
+		<h2 class="text-center">Sign in or create an account</h2>
+	
+		<p class="text-center">Please select a sign in method:</p>
+
+		<section class="container" id="login-container">
+			<div id="firebaseui-auth-container"></div>
+			<div id="loader">Loading...</div>
+		</section>
+		
+	</div>
+	
+</main>
+
+<!-- Begin footer -->
+<footer class="footer" id="footer"></footer>
+
+<script src="./bootstrap/js/bootstrap.bundle.min.js"></script>
+<script defer type="text/javascript" src="js/auth.js"></script>
+<script defer type="text/javascript" src="js/login.js"></script>
+
+</body>
+</html>

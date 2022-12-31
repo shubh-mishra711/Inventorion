@@ -1,0 +1,6 @@
+/* -------------------------------- LOGIN -------------------------------- */
+#signInButton, #signOutButton { display: none; }
+.login-container { margin-top: 30%; text-align: center; }
+
+/* -------------------------------- NAVBAR ------------------------------- */
+.navbar-brand img { max-width: 1.5em; margin-right: 0.5em; }

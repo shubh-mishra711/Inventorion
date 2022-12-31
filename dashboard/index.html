@@ -12,26 +12,38 @@
 	
 	<title>Dashboard || Inventorion</title>
 	
+	<!-- CSS -->
 	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/dashboard.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
 
 	<!-- Favicons -->
-	<link rel="apple-touch-icon" href="/docs/5.2/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
-	<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-32x32.png" sizes="32x32" type="image/png">
-	<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon-16x16.png" sizes="16x16" type="image/png">
-	<link rel="manifest" href="/docs/5.2/assets/img/favicons/manifest.json">
-	<link rel="mask-icon" href="/docs/5.2/assets/img/favicons/safari-pinned-tab.svg" color="#712cf9">
-	<link rel="icon" href="/docs/5.2/assets/img/favicons/favicon.ico">
+	<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png" sizes="180x180">
+	<link rel="icon" href="/assets/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
+	<link rel="icon" href="/assets/favicon/favicon-16x16.png" sizes="16x16" type="image/png">
+	<link rel="mask-icon" href="/assets/favicon/android-chrome-512x512-maskable.png" color="#ffffff">
+	<link rel="icon" href="/assets/favicon/favicon.ico">
+	<link rel="manifest" href="/manifest.json">
+	
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-MTQ4LJKBZ9"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-MTQ4LJKBZ9');
+	</script>
 
 	<!-- update the version number as needed --> 
 	<script defer src="/__/firebase/9.14.0/firebase-app-compat.js"></script> 
 	<!-- include only the Firebase features as you need --> 
 	<script defer src="/__/firebase/9.14.0/firebase-auth-compat.js"></script> 
-	<script defer src="/__/firebase/9.14.0/firebase-database-compat.js"></script> 
+	<!--script defer src="/__/firebase/9.14.0/firebase-database-compat.js"></script--> 
 	<script defer src="/__/firebase/9.14.0/firebase-firestore-compat.js"></script> 
-	<script defer src="/__/firebase/9.14.0/firebase-functions-compat.js"></script> 
-	<script defer src="/__/firebase/9.14.0/firebase-messaging-compat.js"></script> 
-	<script defer src="/__/firebase/9.14.0/firebase-storage-compat.js"></script> 
+	<!-- script defer src="/__/firebase/9.14.0/firebase-functions-compat.js"></script--> 
+	<!-- script defer src="/__/firebase/9.14.0/firebase-messaging-compat.js"></script--> 
+	<!--script defer src="/__/firebase/9.14.0/firebase-storage-compat.js"></script--> 
 	<script defer src="/__/firebase/9.14.0/firebase-analytics-compat.js"></script> 
 	<script defer src="/__/firebase/9.14.0/firebase-remote-config-compat.js"></script> 
 	<script defer src="/__/firebase/9.14.0/firebase-performance-compat.js"></script> 
@@ -44,12 +56,13 @@
 	
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
 	
-	<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="/">Inventorion</a>
+	<a class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" href="/"><img src="/assets/logo-light.svg" alt="" />Inventorion</a>
 	<button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
 	<h1 class="w-100 rounded-0 border-0" id="storeName"></h1>
 	<div class="navbar-nav">
 		<div class="nav-item text-nowrap">
-			<a class="nav-link px-3" href="#" id="signOutButton">Sign out</a>
+			<a class="nav-link px-3" href="/signin.html" id="signInButton">Sign in</a>
+			<a class="nav-link px-3" onclick="logout()" href="#" id="signOutButton">Sign out</a>
 		</div>
 	</div>
 	
@@ -227,6 +240,7 @@
 </div>
 	
 <script src="/bootstrap/js/bootstrap.bundle.min.js"></script> 
+<script src="/js/auth.js" defer></script>
 	
 </body>
 </html>
