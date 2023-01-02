@@ -1,6 +1,16 @@
+/* -------------------------------- COLORS ------------------------------- */
+:root { 
+	--main-green: #28844A;
+	--dark-green: #004B1C;
+	--main-blue: #265D72;
+	--main-orange: #B67937;
+	--main-red: #B64D37;
+}
+
 /* -------------------------------- LOGIN -------------------------------- */
 #signInButton, #signOutButton { display: none; }
 .login-container { margin-top: 30%; text-align: center; }
 
 /* -------------------------------- NAVBAR ------------------------------- */
+.navbar { background-color: var(--dark-green)!important; }
 .navbar-brand img { max-width: 1.5em; margin-right: 0.5em; }
