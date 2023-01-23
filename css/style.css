@@ -5,6 +5,7 @@
 	--main-blue: #265D72;
 	--main-orange: #B67937;
 	--main-red: #B64D37;
+	--user-bar-height: 3em;
 }
 
 /* -------------------------------- LOGIN -------------------------------- */
@@ -14,3 +15,16 @@
 /* -------------------------------- NAVBAR ------------------------------- */
 .navbar { background-color: var(--dark-green)!important; }
 .navbar-brand img { max-width: 1.5em; margin-right: 0.5em; }
+h1#storeName { color: white; font-size: 1.5em; margin-bottom: 0; margin-left: 0.5em; }
+
+/* ------------------------------- LEFT NAV ------------------------------ */
+.sidebar-sticky { height: calc(100vh - 48px - var(--user-bar-height)); }
+#sidebarMenu .nav-link { padding: 0.25em 1em; }
+#sidebarMenu .nav-link:hover, #sidebarMenu .nav-link:active { color: var(--main-orange); padding: 0.25em 1em; }
+.sidebar-footer { height: var(--user-bar-height); border-top: 1px solid lightgray; border-right: 1px solid lightgray; background: #e9e8e8; display: flex; align-items: center; justify-content: space-between; padding: 0 1em; }
+.sidebar-footer p { margin: 0; color: #5e5e5e; }
+.sidebar-footer img { filter: invert(36%) sepia(2%) saturate(0%) hue-rotate(99deg) brightness(96%) contrast(90%); }
+
+/* ------------------------------- PROFILE ------------------------------ */
+.btn-edit img { filter: invert(76%) sepia(10%) saturate(18%) hue-rotate(326deg) brightness(86%) contrast(88%); }
+.btn-edit img:hover, .btn-edit img:active { filter: invert(31%) sepia(52%) saturate(556%) hue-rotate(151deg) brightness(88%) contrast(89%); }

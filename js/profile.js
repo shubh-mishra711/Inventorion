@@ -1,17 +1,3 @@
-function changeCollapse () {
-	const user = firebase.auth().currentUser;
-	if (user) {
-		const userData = db.collection('userData').doc(user.uid);
-		userData.set({
-			autoCollapse: document.getElementById('setCollapse').checked
-		}, { merge: true }).catch ((error) => {
-			console.error ('Error updating user data: ', error);
-		});
-	} else {
-		console.log ('Error changing user settings.');
-	}
-}
-
 // Fetch the database's profile data for the user and display it
 function getProfileData (user) {
 	// Fetch the user's data
@@ -19,19 +5,20 @@ function getProfileData (user) {
 	
 	// Display the user's name
 	document.getElementById('user-name').textContent = user.displayName;
-	document.getElementById('user-name').innerHTML += '<button type="button" class="btn btn-sm btn-link btn-edit" data-bs-toggle="modal" data-bs-target="#editDisplayNameModal"><i class="bi bi-pencil-square"></i></button>';
+	document.getElementById('user-name').innerHTML += '<button type="button" class="btn btn-sm btn-link btn-edit" data-bs-toggle="modal" data-bs-target="#editDisplayNameModal"><img src="/assets/icons/edit.svg" alt="Edit name" /></button>';
 	
 	// Display the user's account details
 	const details = document.getElementById('user-details');
-	let detailsContent = `<h4>Your information</h4>`;
-	detailsContent += `<div class="row"><div class="col-5 col-sm-4 col-md-3 col-xl-2"><p><strong>Email</strong></p></div><div class="col-7 col-sm-8 col-md-9 col-xl-10"><p id="email"></p></div></div>`;
-	detailsContent += `<div class="row"><div class="col-5 col-sm-4 col-md-3 col-xl-2"><p><strong>Linked accounts</strong></p></div>`;
-	detailsContent += `<div class="col-7 col-sm-8 col-md-9 col-xl-10">`;
+	
+	let detailsContent = `<div class="row"><div class="col-5"><p><strong>Business Name</strong></p></div><div class="col-7"><p id="business-name"></p></div></div>`;
+	detailsContent += `<div class="row"><div class="col-5"><p><strong>Email</strong></p></div><div class="col-7"><p id="email"></p></div></div>`;
+	detailsContent += `<div class="row"><div class="col-5"><p><strong>Linked accounts</strong></p></div>`;
+	detailsContent += `<div class="col-7">`;
 	user.providerData.forEach((profile) => {
 		const provider = profile.providerId;
 		switch (provider) {
 			case 'google.com':
-				detailsContent += '<img src="assets/providers/google.svg" class="provider" alt="Google" width="24" height="24">';
+				detailsContent += '<img src="/assets/providers/google.svg" class="provider" alt="Google" width="24" height="24">';
 				break;
 			default:
 				alert ('Error getting linked accounts');
@@ -41,26 +28,34 @@ function getProfileData (user) {
 	detailsContent += `<div class="col-12"><button class="btn btn-sm btn-link" onclick="resetPassword()">Send password reset email</button></div></row>`;
 	details.innerHTML = detailsContent;
 	
-	document.getElementById('email').textContent = user.email;
-	document.getElementById('email').innerHTML += `<button type="button" class="btn btn-sm btn-link btn-edit" data-bs-toggle="modal" data-bs-target="#editEmailModal"><i class="bi bi-pencil-square"></i></button>`;
+	userData.get().then((doc) => {
+		const data = doc.data();
+		document.getElementById('business-name').textContent = data.settings.business_name;
+		document.getElementById('business-name').innerHTML += `<button type="button" class="btn btn-sm btn-link btn-edit" data-bs-toggle="modal" data-bs-target="#editBizNameModal"><img src="/assets/icons/edit.svg" alt="Edit business name" /></button>`;
+	}).catch((error) => {
+		console.log('Error getting user settings: ', error);
+	});
 	
-	document.getElementById('settings').innerHTML = `<div class="form-check"><input class="form-check-input" type="checkbox" value="" id="setCollapse"><label class="form-check-label" for="setCollapse">Auto-collapse completed checklist sections</label></div>`;
+	document.getElementById('email').textContent = user.email;
+	document.getElementById('email').innerHTML += `<button type="button" class="btn btn-sm btn-link btn-edit" data-bs-toggle="modal" data-bs-target="#editEmailModal"><img src="/assets/icons/edit.svg" alt="Edit email address" /></button>`;
+	
+	document.getElementById('settings').innerHTML = `<p>Production queue visibility:</p><div class="form-check"><input class="form-check-input" type="radio" name="setQueueVis" id="setQueueVisPrivate" checked><label class="form-check-label" for="setQueueVisPrivate">Private</label></div><div class="form-check"><input class="form-check-input" type="radio" name="setQueueVis" id="setQueueVisPublic"><label class="form-check-label" for="setQueueVisPublic">Public</label></div>`;
 	
 	// Check to see what user settings exist
 	userData.get().then((doc) => {
 		const data = doc.data();
-		if (data.autoCollapse) {
-			document.getElementById('setCollapse').checked = data.autoCollapse;
+		if (data.settings.queue_public) {
+			document.getElementById('setQueueVisPublic').checked = true;
+			document.getElementById('setQueueVisPrivate').checked = false;
 		} else {
-			document.getElementById('setCollapse').checked = false;
+			document.getElementById('setQueueVisPublic').checked = false;
+			document.getElementById('setQueueVisPrivate').checked = true;
 		}
-		document.getElementById('setCollapse').addEventListener("click", changeCollapse, false);
 	}).catch((error) => {
 		console.log('Error getting user settings: ', error);
 	});
-		
-	document.getElementById('deleteDiv').innerHTML = '<hr><button class="btn btn-sm btn-outline-danger me-2 mb-2" data-bs-toggle="modal" data-bs-target="#clearModal">Clear all checked items</button>';
-	document.getElementById('deleteDiv').innerHTML += '<button class="btn btn-sm btn-outline-danger mb-4" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete my account and data</button>';
+	
+	document.getElementById('deleteDiv').innerHTML = '<button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete my account and data</button>';
 }
 
 // Changes the user's displayName
@@ -83,6 +78,25 @@ function changeName () {
 	}).catch((error) => {
 		console.log ('Error updating name: ', error);
 	});
+}
+
+function changeBizName () {
+	const user = firebase.auth().currentUser;
+	if (user) {
+		const userData = db.collection('userData').doc(user.uid);
+		const newBizName = document.getElementById('newBizName').value;
+		userData.set({
+			settings: {
+				business_name: newBizName
+			}
+		}, { merge: true }).then(() => {
+			location.reload();
+		}).catch ((error) => {
+			console.error ('Error updating user data: ', error);
+		});
+	} else {
+		console.log ('Error changing user settings.');
+	}
 }
 
 function changeEmail () {
@@ -126,17 +140,6 @@ function resetPassword () {
 	.catch((error) => {
 		console.log ('Error resetting password', error);
 	});
-}
-
-function clearData () {
-	const user = firebase.auth().currentUser;
-	const userData = db.collection('userData').doc(user.uid);
-	
-	userData.set({
-			cards: {}
-		}, { merge: true }).catch ((error) => {
-			console.error ('Error resetting user data: ', error);
-		});
 }
 
 function deleteUser () {

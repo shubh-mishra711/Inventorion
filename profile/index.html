@@ -1,0 +1,229 @@
+<!doctype html>
+
+<html lang="en">
+	
+<head>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="Stephanie Cervi Design">
+	<meta name="theme-color" content="#712cf9">
+	
+	<title>Profile || Inventorion</title>
+	
+	<!-- CSS -->
+	<link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/dashboard.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
+
+	<!-- Favicons -->
+	<link rel="apple-touch-icon" href="/assets/favicon/apple-touch-icon.png" sizes="180x180">
+	<link rel="icon" href="/assets/favicon/favicon-32x32.png" sizes="32x32" type="image/png">
+	<link rel="icon" href="/assets/favicon/favicon-16x16.png" sizes="16x16" type="image/png">
+	<link rel="mask-icon" href="/assets/favicon/android-chrome-512x512-maskable.png" color="#ffffff">
+	<link rel="icon" href="/assets/favicon/favicon.ico">
+	<link rel="manifest" href="/manifest.json">
+	
+	<!-- Google tag (gtag.js) -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=G-MTQ4LJKBZ9"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'G-MTQ4LJKBZ9');
+	</script>
+
+	<!-- update the version number as needed --> 
+	<script defer src="/__/firebase/9.14.0/firebase-app-compat.js"></script> 
+	<!-- include only the Firebase features as you need --> 
+	<script defer src="/__/firebase/9.14.0/firebase-auth-compat.js"></script> 
+	<!--script defer src="/__/firebase/9.14.0/firebase-database-compat.js"></script--> 
+	<script defer src="/__/firebase/9.14.0/firebase-firestore-compat.js"></script> 
+	<!-- script defer src="/__/firebase/9.14.0/firebase-functions-compat.js"></script--> 
+	<!-- script defer src="/__/firebase/9.14.0/firebase-messaging-compat.js"></script--> 
+	<!--script defer src="/__/firebase/9.14.0/firebase-storage-compat.js"></script--> 
+	<script defer src="/__/firebase/9.14.0/firebase-analytics-compat.js"></script> 
+	<script defer src="/__/firebase/9.14.0/firebase-remote-config-compat.js"></script> 
+	<script defer src="/__/firebase/9.14.0/firebase-performance-compat.js"></script> 
+	<!-- initialize the SDK after all desired features are loaded, set useEmulator to false to avoid connecting the SDK to running emulators. --> 
+	<script defer src="/__/firebase/init.js?useEmulator=true"></script>
+	
+</head>
+	
+<body>
+	
+<!-- Top header bar, populated by JavaScript -->
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow" id="header"></header>
+	
+<div class="container-fluid">
+	
+	<div class="row">
+		
+		<!-- Side nav bar, populated by JavaScript -->
+		<nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+			<noscript>Please enable JavaScript to use this website.</noscript>
+			<!-- Left-hand nav links -->
+			<div class="position-sticky pt-3 sidebar-sticky" id="sidebarMenu"></div>
+			<div class="sidebar-footer" id="sidebarFooter">
+			</div>
+		</nav>
+		
+		<main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+			<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+				<h1 class="h2">Profile</h1>
+			</div>
+
+			<section id="profileData" class="row row-cols-2">
+				
+				<div class="col">
+					<div class="card">
+						<div class="card-header">Your information</div>
+						<div class="card-body">
+							<h5 class="card-title" id="user-name">Loading...</h5>
+							<noscript>It looks like you&rsquo;ve disabled JavaScript, or your browser doesn&rsquo;t support it. To see the content for this website, please enable JavaScript.</noscript>
+							<div id="user-details"></div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col">
+					<div class="card">
+						<div class="card-header">Settings</div>
+						<div class="card-body">
+							<div id="settings"></div>
+							<hr>
+							<div id="deleteDiv"></div>
+						</div>
+					</div>
+				</div>
+
+			</section>
+
+			<div id="toast-container" class="toast-container position-fixed p-3"></div>
+
+			<!-- Edit displayName modal -->
+			<div class="modal fade" id="editDisplayNameModal" tabindex="-1" aria-labelledby="editDisplayNameModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="editDisplayNameModalLabel">Edit your information</h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+
+							<div class="mb-3 row">
+								<label for="newName" class="col-form-label">Please enter a new name:</label>
+								<div><input type="text" class="form-control col-10" name="newName" id="newName" /></div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary" id="editNameButton" onclick="changeName()" data-bs-dismiss="modal">Submit</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Edit business name modal -->
+			<div class="modal fade" id="editBizNameModal" tabindex="-1" aria-labelledby="editBizNameModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="editBizNameModalLabel">Edit your business name</h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+
+							<div class="mb-3 row">
+								<label for="newBizName" class="col-form-label">Please enter a new business name:</label>
+								<div><input type="text" class="form-control col-10" name="newBizName" id="newBizName" /></div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary" id="editBizNameButton" onclick="changeBizName()" data-bs-dismiss="modal">Submit</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Edit email modal -->
+			<div class="modal fade" id="editEmailModal" tabindex="-1" aria-labelledby="editEmailModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="editEmailModalLabel">Edit your information</h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+
+							<div class="mb-3 row">
+								<label for="newName" class="col-form-label">Please enter a new email address:</label>
+								<div><input type="email" class="form-control col-10" name="newEmail" id="newEmail" /></div>
+							</div>
+
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-primary" id="editEmailButton" onclick="changeEmail()" data-bs-dismiss="modal">Submit</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Comfirm clear data modal -->
+			<div class="modal fade" id="clearModal" tabindex="-1" aria-labelledby="clearModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="clearModalLabel">Please confirm</h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<h5>Clear all checked items and reset your checklist?</h5>
+							<p>Please confirm that you want to reset all your checked items to unchecked.  This is unrecoverable.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="cancel" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-success" data-bs-dismiss="modal" onClick="clearData()">Clear all</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Comfirm delete account modal -->
+			<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="deleteModalLabel">Please confirm</h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<h5>Delete your account and all your data?</h5>
+							<p>Please confirm that you want to delete your account and all of your data from our servers.  This is unrecoverable.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="cancel" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-success" data-bs-dismiss="modal" onClick="deleteUser()">Delete my account</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+	
+</div>
+	
+<script src="/bootstrap/js/bootstrap.bundle.min.js"></script> 
+<script src="/js/headerfooter.js"></script> 
+<script src="/js/nav.js"></script>
+<script src="/js/auth.js" defer></script>
+<script src="/js/profile.js" defer></script>
+	
+</body>
+</html>

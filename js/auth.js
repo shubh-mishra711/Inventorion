@@ -5,14 +5,18 @@ function getUserData (user) {
 	const userData = db.collection('userData').doc(user.uid);
 	userData.get().then((doc) => {
         if (doc.exists) {
-			if (document.location.pathname == '/index.html' || document.location.pathname == '/profile.html' ) {
+			const data = doc.data();
+			document.getElementById('storeName').textContent = data.settings.business_name;
+			if (document.location.pathname == '/profile/' ) {
 				getProfileData (user);
 			} else {
 				return;
 			}
 		} else {
 			userData.set({
-				cards: {}
+				settings:	{
+					queue_public:	false
+				}
 			}).then(() => {
 				return;
 			}).catch((error) => {
@@ -38,13 +42,13 @@ function logout () {
 // Check whether the user is logged in
 firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
-		document.getElementById('signInButton').remove();
-		document.getElementById('signOutButton').style.display = 'inline';
+		//document.getElementById('signInButton').remove();
+		//document.getElementById('signOutButton').style.display = 'inline';
 		//document.getElementById('profileDropdown').style.display = 'block';
-		//document.getElementById('profileUser').textContent = user.displayName;
+		document.getElementById('sidebarUser').textContent = user.displayName;
 		getUserData(user);
 	} else {
-		document.getElementById('signInButton').style.display = 'block';
-		document.getElementById('signOutButton').remove();
+		//document.getElementById('signInButton').style.display = 'block';
+		//document.getElementById('signOutButton').remove();
 	}
 });
