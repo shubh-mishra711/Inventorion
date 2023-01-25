@@ -25,6 +25,20 @@ h1#storeName { color: white; font-size: 1.5em; margin-bottom: 0; margin-left: 0.
 .sidebar-footer p { margin: 0; color: #5e5e5e; }
 .sidebar-footer img { filter: invert(36%) sepia(2%) saturate(0%) hue-rotate(99deg) brightness(96%) contrast(90%); }
 
-/* ------------------------------- PROFILE ------------------------------ */
+/* ------------------------------- PROFILE ------------------------------- */
 .btn-edit img { filter: invert(76%) sepia(10%) saturate(18%) hue-rotate(326deg) brightness(86%) contrast(88%); }
 .btn-edit img:hover, .btn-edit img:active { filter: invert(31%) sepia(52%) saturate(556%) hue-rotate(151deg) brightness(88%) contrast(89%); }
+
+/* ---------------------------- SALES CHANNELS --------------------------- */
+#channelsContainer { padding: 1em 0 2em 0; }
+#channelsContainer .card-header { display: flex; align-items: center; justify-content: space-between; }
+#channelsContainer .card-header h5 { margin-bottom: 0; font-size: 1.1rem; }
+.toggle-switch { position: relative; display: inline-block; width: 50px; height: 27px; }
+.toggle-switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #ccc; -webkit-transition: .4s; transition: .4s; border-radius: 27px; }
+.slider:before { position: absolute; content: ""; height: 19px; width: 19px; left: 4px; bottom: 4px; background-color: white; -webkit-transition: .4s; transition: .4s; border-radius: 50%; }
+input:checked + .slider { background-color: var(--dark-green); }
+input:focus + .slider { box-shadow: 0 0 1px var(--dark-green); }
+input:checked + .slider:before { -webkit-transform: translateX(23px); -ms-transform: translateX(23px); transform: translateX(23px); }
+table.fee-table { margin-bottom: 0; }
+table.fee-table tr:last-of-type td { border-bottom: none; }

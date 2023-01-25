@@ -23,7 +23,7 @@ const navItems = {
 	settings: {
 		channels: {
 			title:		"Sales channels",
-			path:		"/settings/channels/"
+			path:		"/channels/"
 		}
 	}
 };
@@ -39,7 +39,7 @@ for (const sectionIndex in navItems) {
 	for (const linkIndex in section) {
 		const linkItem = section[linkIndex];
 		if (linkItem.title) {
-			navContent += `<li class="nav-item"><a class="nav-link" href="${linkItem.link}" id="nav-${linkIndex}">${linkItem.title}</a></li>`;
+			navContent += `<li class="nav-item"><a class="nav-link" href="${linkItem.path}" id="nav-${linkIndex}">${linkItem.title}</a></li>`;
 		}
 	}
 	navContent += `</ul>`

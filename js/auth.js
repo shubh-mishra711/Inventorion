@@ -9,13 +9,16 @@ function getUserData (user) {
 			document.getElementById('storeName').textContent = data.settings.business_name;
 			if (document.location.pathname == '/profile/' ) {
 				getProfileData (user);
-			} else {
+			} else if (document.location.pathname == '/channels/') {
+				getChannels (user);
+			}else {
 				return;
 			}
 		} else {
 			userData.set({
 				settings:	{
-					queue_public:	false
+					queue_public:	false,
+					business_name:	"My Online Business"
 				}
 			}).then(() => {
 				return;
@@ -42,13 +45,9 @@ function logout () {
 // Check whether the user is logged in
 firebase.auth().onAuthStateChanged(function(user) {
 	if (user) {
-		//document.getElementById('signInButton').remove();
-		//document.getElementById('signOutButton').style.display = 'inline';
-		//document.getElementById('profileDropdown').style.display = 'block';
 		document.getElementById('sidebarUser').textContent = user.displayName;
 		getUserData(user);
 	} else {
-		//document.getElementById('signInButton').style.display = 'block';
-		//document.getElementById('signOutButton').remove();
+		// Insert "please log in again" experience here
 	}
 });
