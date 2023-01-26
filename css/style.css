@@ -12,8 +12,7 @@
 .btn-primary:active { background-color: var(--dark-green)!important; border-color: var(--dark-green)!important; }
 
 /* -------------------------------- LOGIN -------------------------------- */
-#signInButton, #signOutButton { display: none; }
-.login-container { margin-top: 30%; text-align: center; }
+.login-container { margin-top: 30vh; text-align: center; }
 
 /* ------------------------------- HOMEPAGE ------------------------------ */
 .homepage-header { text-align: center; margin-top: 20vh; }
@@ -32,6 +31,10 @@ h1#storeName { color: white; font-size: 1.5em; margin-bottom: 0; margin-left: 0.
 .sidebar-footer { height: var(--user-bar-height); border-top: 1px solid lightgray; border-right: 1px solid lightgray; background: #e9e8e8; display: flex; align-items: center; justify-content: space-between; padding: 0 1em; }
 .sidebar-footer p { margin: 0; color: #5e5e5e; }
 .sidebar-footer img { filter: invert(36%) sepia(2%) saturate(0%) hue-rotate(99deg) brightness(96%) contrast(90%); }
+
+@media (max-width: 767.98px) {
+	.sidebar { top: 0; }
+}
 
 /* ------------------------------- PROFILE ------------------------------- */
 .btn-edit img { filter: invert(76%) sepia(10%) saturate(18%) hue-rotate(326deg) brightness(86%) contrast(88%); }
