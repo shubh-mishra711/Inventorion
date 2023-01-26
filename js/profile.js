@@ -1,3 +1,34 @@
+// Change queue page visibility settings
+function changeQueueVis (event) {
+	event = event || window.event;
+    event.target = event.target || event.srcElement;
+    let element = event.target;
+	
+	const user = firebase.auth().currentUser;
+	if (user) {
+		const userData = db.collection('userData').doc(user.uid);
+		if (element.id === 'setQueueVisPublic') {
+			userData.set({
+				settings: {
+					queue_public: true
+				}
+			}, { merge: true }).catch ((error) => {
+				console.error ('Error updating user data: ', error);
+			});
+		} else if (element.id === 'setQueueVisPrivate') {
+			userData.set({
+				settings: {
+					queue_public: false
+				}
+			}, { merge: true }).catch ((error) => {
+				console.error ('Error updating user data: ', error);
+			});
+		} else {
+			console.log ('Invalid queue visibility value');
+		}
+	}
+}
+
 // Fetch the database's profile data for the user and display it
 function getProfileData (user) {
 	// Fetch the user's data
@@ -56,6 +87,11 @@ function getProfileData (user) {
 	});
 	
 	document.getElementById('deleteDiv').innerHTML = '<button class="btn btn-sm btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Delete my account and data</button>';
+	
+	const queueVisPrivate = document.getElementById('setQueueVisPrivate');
+	queueVisPrivate.addEventListener('click', changeQueueVis, false);	
+	const queueVisPublic = document.getElementById('setQueueVisPublic');
+	queueVisPublic.addEventListener('click', changeQueueVis, false);
 }
 
 // Changes the user's displayName

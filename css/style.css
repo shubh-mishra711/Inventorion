@@ -7,10 +7,18 @@
 	--main-red: #B64D37;
 	--user-bar-height: 3em;
 }
+.btn-primary { background-color: var(--main-blue); border-color: var(--main-blue); }
+.btn-primary:hover, .btn-primary:focus { background-color: var(--main-green); border-color: var(--main-green); }
+.btn-primary:active { background-color: var(--dark-green)!important; border-color: var(--dark-green)!important; }
 
 /* -------------------------------- LOGIN -------------------------------- */
 #signInButton, #signOutButton { display: none; }
 .login-container { margin-top: 30%; text-align: center; }
+
+/* ------------------------------- HOMEPAGE ------------------------------ */
+.homepage-header { text-align: center; margin-top: 20vh; }
+.homepage-header img { max-width: 10em; height: auto; display: inline-block; }
+.homepage-header h1 { font-size: 5em; }
 
 /* -------------------------------- NAVBAR ------------------------------- */
 .navbar { background-color: var(--dark-green)!important; }
@@ -31,6 +39,7 @@ h1#storeName { color: white; font-size: 1.5em; margin-bottom: 0; margin-left: 0.
 
 /* ---------------------------- SALES CHANNELS --------------------------- */
 #channelsContainer { padding: 1em 0 2em 0; }
+#channelsContainer .card { margin-bottom: 1em; }
 #channelsContainer .card-header { display: flex; align-items: center; justify-content: space-between; }
 #channelsContainer .card-header h5 { margin-bottom: 0; font-size: 1.1rem; }
 .toggle-switch { position: relative; display: inline-block; width: 50px; height: 27px; }

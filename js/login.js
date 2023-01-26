@@ -32,9 +32,9 @@ const uiConfig = {
 		firebase.auth.GoogleAuthProvider.PROVIDER_ID
 	],
 	// Terms of service url.
-	tosUrl: './terms-of-service.html',
+	tosUrl: '/terms-of-service.html',
 	// Privacy policy url.
-	privacyPolicyUrl: './privacy-policy.html'
+	privacyPolicyUrl: '/privacy-policy.html'
 };
 
 // The start method will wait until the DOM is loaded.

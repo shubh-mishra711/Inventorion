@@ -77,11 +77,33 @@
 			
 			<p>Add or remove sales channels for your business here.</p>
 
-			<section id="channelsContainer" class="row row-cols-3"></section>
+			<section id="channelsContainer" class="row row-cols-1 row-cols-sm-2 row-cols-xl-3 row-cols-xxl-4"></section>
 			
-			<p class="small">Please note that integration between Inventorion and these sales channels is still in development and not currently available.</p>
+			<p class="text-center"><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#customChannelModal">Add a custom sales channel</button></p>
+			
+			
+			<p class="small mt-4 text-center">Please note that automated integration between Inventorion and these sales channels is still in development and not currently available.</p>
 
 			<div id="toast-container" class="toast-container position-fixed p-3"></div>
+
+			<!-- Add custom channel modal -->
+			<div class="modal fade" id="customChannelModal" tabindex="-1" aria-labelledby="customChannelModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="customChannelModalLabel">Add a custom sales channel</h4>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<p>Custom sales channel</p>
+						</div>
+						<div class="modal-footer">
+							<button type="cancel" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
+							<button type="submit" class="btn btn-success" data-bs-dismiss="modal" onClick="customChannel()">Add channel</button>
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<!-- Comfirm remove channel modal -->
 			<div class="modal fade" id="removeChannelModal" tabindex="-1" aria-labelledby="removeChannelModalLabel" aria-hidden="true">

@@ -7,13 +7,7 @@ function getUserData (user) {
         if (doc.exists) {
 			const data = doc.data();
 			document.getElementById('storeName').textContent = data.settings.business_name;
-			if (document.location.pathname == '/profile/' ) {
-				getProfileData (user);
-			} else if (document.location.pathname == '/channels/') {
-				getChannels (user);
-			}else {
-				return;
-			}
+			getProfileData (user);
 		} else {
 			userData.set({
 				settings:	{
