@@ -41,10 +41,21 @@ function getProfileData (user) {
 		const data = doc.data();
 		for (channelIndex in data.channels) {
 			const channel = data.channels[channelIndex];
-			document.getElementById(`toggle-${channelIndex}`).checked = channel
+			if (channelIndex.substring(0, 6) === 'custom') {
+				/*let customChannel = '';
+				customChannel += `<div class="col"><div class="card">`;
+				customChannel += `<div class="card-header"><h5>${channel.name}</h5><label class="toggle-switch"><input type="checkbox" id="toggle-${channel.id}"><span class="slider"></span></label></div>`;
+				customChannel += `<table class="table fee-table"><tbody>`;
+				customChannel += `<tr><td>Transaction fee</td><td><td>$${channel.fee_flat.toFixed(2)} + ${channel.fee_percent}%</td></tr>`;
+				customChannel += `<tr><td>Payment processing fee</td><td><td>$${channel.pay_flat.toFixed(2)} + ${channel.pay_percent}%</td></tr>`;
+				customChannel += `</tbody></table>`;
+				customChannel += `</div></div>`;*/
+			} else {
+				document.getElementById(`toggle-${channelIndex}`).checked = channel;
+			}
 		}
 	}).catch((error) => {
-		console.log('Error getting user settings: ', error);
+		console.error('Error getting user settings: ', error);
 	});
 }
 
@@ -62,6 +73,36 @@ function toggleChannel (event) {
 		userData.set({
 			channels: {
 				[channelID]: channelSetting
+			}
+		}, { merge: true }).catch ((error) => {
+			console.error ('Error updating user data: ', error);
+		});
+	}
+}
+
+// Adds a custom user-defined sales channel
+function addCustomChannel () {
+	const channelName = document.getElementById('channelName').value;
+	const channelID = `custom-${channelName.toLowerCase()}`;
+	const channelFeeFlat = parseFloat(document.getElementById('channelFeeFlat').value);
+	const channelFeePercent = parseFloat(document.getElementById('channelFeePercent').value);
+	const channelPayFlat = parseFloat(document.getElementById('channelPayFlat').value);
+	const channelPayPercent = parseFloat(document.getElementById('channelPayPercent').value);
+	
+	const user = firebase.auth().currentUser;
+	if (user) {
+		const userData = db.collection('userData').doc(user.uid);
+		userData.set({
+			channels: {
+				[channelID]: {
+					name:			channelName,
+					id:				channelID,
+					enabled:		true,
+					fee_flat:		channelFeeFlat,
+					fee_percent:	channelFeePercent,
+					pay_flat:		channelPayFlat,
+					pay_percent:	channelPayPercent
+				}
 			}
 		}, { merge: true }).catch ((error) => {
 			console.error ('Error updating user data: ', error);
